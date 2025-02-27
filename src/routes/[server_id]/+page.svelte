@@ -1,13 +1,13 @@
 <script lang="ts">
     import ServersSidebar from "../servers-sidebar.svelte";
-    import Chat from "../chat.svelte";
     import { page } from "$app/state";
+    import Chat from "../chat.svelte";
 </script>
 
 <div>
     <title>Discool!</title>
     <ServersSidebar servers={page.data.servers} />
-    <Chat channels={page.data.channels} serverId={page.data.serverId} />
+    <Chat channels={page.data.channels} serverId={page.data.serverId}/>
 </div>
 
 <style>

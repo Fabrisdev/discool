@@ -1,7 +1,14 @@
 <script>
+    import Message from "./message.svelte";
+
+    let { messages } = $props()
 </script>
 
-<div></div>
+<div>
+    {#each messages as message}
+        <Message {...message}/>
+    {/each}
+</div>
 
 <style>
     div {
@@ -9,5 +16,10 @@
         width: 100%;
         height: 100%;
         border-radius: 15px;
+        overflow-y: scroll;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 </style>

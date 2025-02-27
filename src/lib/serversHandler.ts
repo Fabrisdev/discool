@@ -8,7 +8,11 @@ export async function fetchServers() {
         return {
             name: server.name,
             icon_src: server.iconURL(),
-            id: server.id
+            id: server.id,
         }
     })
+}
+
+export async function fetchServer(id: string){
+    return await client.guilds.fetch(id)
 }

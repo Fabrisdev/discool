@@ -1,13 +1,13 @@
 <script>
     import ChannelsSidebar from "./channels-sidebar.svelte";
     import Messages from "./messages.svelte";
-    let { channels, serverId, channelId = "" } = $props();
+    let { channels, serverId, channelId = "", messages = [] } = $props();
 </script>
 
 <span>
     <ChannelsSidebar {channels} {serverId} {channelId} />
     <div>
-        <Messages />
+        <Messages {messages}/>
         <input type="text" />
     </div>
 </span>

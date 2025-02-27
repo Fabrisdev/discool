@@ -11,6 +11,7 @@
         channels={page.data.channels}
         serverId={page.data.serverId}
         channelId={page.data.channelId}
+        messages={page.data.messages}
     />
 </div>
 
