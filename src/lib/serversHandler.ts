@@ -1,8 +1,8 @@
 import { client } from "./clientHandler"
 
-export const servers = await getServers()
+export const servers = await fetchServers()
 
-export async function getServers() {
+export async function fetchServers() {
     const servers = await client.guilds.fetch()
     return servers.map(server => {
         return {
