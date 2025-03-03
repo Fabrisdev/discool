@@ -22,6 +22,9 @@
             }
             newMessages.push(parsedData.message);
         });
+        onDestroy(() => {
+            ws.close();
+        });
     });
 </script>
 
