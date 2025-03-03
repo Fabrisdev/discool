@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+    import DOMPurify from "dompurify";
     let { content, author, createdAt } = $props()
 </script>
 
@@ -8,7 +9,7 @@
         <div id="info">
             <p id="username">{author.username}</p><p id="created-at">{createdAt}</p>
         </div>
-        <p>{content}</p>
+        <p>{@html content}</p>
     </div>
 </div>
 

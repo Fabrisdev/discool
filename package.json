@@ -27,7 +27,11 @@
 	},
 	"dependencies": {
 		"@types/node": "^22.13.5",
+		"@types/ws": "^8.5.14",
 		"discord.js-selfbot-v13": "^3.6.0",
-		"node:module": "link:@types/node:module"
+		"dompurify": "^3.2.4",
+		"isomorphic-dompurify": "^2.22.0",
+		"node:module": "link:@types/node:module",
+		"ws": "^8.18.1"
 	}
 }

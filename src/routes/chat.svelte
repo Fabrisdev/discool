@@ -7,7 +7,7 @@
 <span>
     <ChannelsSidebar {channels} {serverId} {channelId} />
     <div>
-        <Messages {messages}/>
+        <Messages {messages} {channelId}/>
         <input type="text" />
     </div>
 </span>

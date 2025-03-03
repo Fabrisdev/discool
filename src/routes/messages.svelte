@@ -1,10 +1,25 @@
-<script>
+<script lang="ts">
+    import type { Action } from "svelte/action";
     import Message from "./message.svelte";
-
-    let { messages } = $props()
+    import { onMount } from "svelte";
+    let { messages, channelId } = $props()
+    
+    const scrollToBottom: Action = div => {
+        div.scrollTo(0, div.scrollHeight)
+    }
+    
+    onMount(() => {
+        const ws = new WebSocket("ws://localhost:8080")
+        ws.addEventListener("message", event => {
+            const parsedData = JSON.parse(event.data)
+            if(channelId != parsedData.channelId) return
+            console.log(parsedData.message)
+            messages = [...messages, parsedData.message]
+        })
+    })
 </script>
 
-<div>
+<div use:scrollToBottom>
     {#each messages as message}
         <Message {...message}/>
     {/each}
