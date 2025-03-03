@@ -1,9 +1,8 @@
 <script lang="ts">
     import type { Action } from "svelte/action";
     import Message from "./message.svelte";
-    import { onDestroy, onMount } from "svelte";
+    import { onDestroy, onMount, tick } from "svelte";
     let { messages, channelId } = $props();
-    let newMessages: any[] = $state([]);
     let div: HTMLDivElement = $state()!;
 
     const scrollToBottom: Action = (div) => {
@@ -16,11 +15,11 @@
             const parsedData = JSON.parse(event.data);
             if (channelId != parsedData.channelId) return;
             if (div.scrollTop + div.clientHeight === div.scrollHeight) {
-                newMessages.push(parsedData.message);
-                scrollToBottom(div);
+                messages = [...messages, parsedData.message];
+                tick().then(() => scrollToBottom(div));
                 return;
             }
-            newMessages.push(parsedData.message);
+            messages = [...messages, parsedData.message];
         });
         onDestroy(() => {
             ws.close();
@@ -30,9 +29,6 @@
 
 <div use:scrollToBottom bind:this={div}>
     {#each messages as message}
-        <Message {...message} />
-    {/each}
-    {#each newMessages as message}
         <Message {...message} />
     {/each}
 </div>
