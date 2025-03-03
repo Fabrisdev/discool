@@ -22,3 +22,9 @@ export async function fetchChannels(serverId: string) {
     cachedChannels[serverId] = textChannels
     return textChannels
 }
+
+export async function sendMessage({ channelId, message }: { channelId: string, message: string }) {
+    const channel = await client.channels.fetch(channelId)
+    if (channel === null || channel.type !== "GUILD_TEXT") return
+    channel.send(message)
+}

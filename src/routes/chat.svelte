@@ -7,8 +7,10 @@
 <span>
     <ChannelsSidebar {channels} {serverId} {channelId} />
     <div>
-        <Messages {messages} {channelId}/>
-        <input type="text" />
+        <Messages {messages} {channelId} />
+        <form method="POST" action="?/send">
+            <input type="text" name="text" />
+        </form>
     </div>
 </span>
 
@@ -38,6 +40,9 @@
         border-radius: 15px;
         bottom: 0;
         border: none;
+        font-size: 15px;
+        color: #fff;
+        padding: 15px;
     }
 
     input:focus {

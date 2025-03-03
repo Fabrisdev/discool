@@ -1,6 +1,7 @@
-import { fetchChannels } from '$lib/channelsHandler.js'
+import { fetchChannels, sendMessage } from '$lib/channelsHandler.js'
 import { fetchLastNMessages } from '$lib/messageHandler.js'
 import { servers } from '$lib/serversHandler'
+import type { Actions } from "./$types"
 
 export const load = (async ({ params }) => {
     const { server_id, channel_id } = params
@@ -12,3 +13,15 @@ export const load = (async ({ params }) => {
         messages: await fetchLastNMessages(server_id, channel_id, 10)
     }
 })
+
+export const actions = {
+    send: async ({ request, params }) => {
+        const data = await request.formData()
+        const text = data.get("text")
+        if (text === null) return
+        sendMessage({
+            channelId: params.channel_id,
+            message: text.toString()
+        })
+    }
+} satisfies Actions
