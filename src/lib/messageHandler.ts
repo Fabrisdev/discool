@@ -1,18 +1,18 @@
 import type { Message } from "discord.js-selfbot-v13";
 import { fetchServer } from "./serversHandler";
 import DOMPurify from "isomorphic-dompurify"
+import { client } from "./clientHandler";
 
-export async function fetchLastNMessages(serverId: string, channelId: string, amount: number){
-    const server = await fetchServer(serverId)
-    const channel = await server.channels.fetch(channelId)
-    if(channel === null || channel.type !== "GUILD_TEXT") return
+export async function fetchLastNMessages(serverId: string, channelId: string, amount: number) {
+    const channel = await client.channels.fetch(channelId)
+    if (channel === null || channel.type !== "GUILD_TEXT") return
     const messages = await channel.messages.fetch({ limit: amount })
     return messages.reverse().map(message => {
-        return formatMessage(message)  
+        return formatMessage(message)
     })
 }
 
-export function formatMessage(message: Message){
+export function formatMessage(message: Message) {
     const rtf = new Intl.RelativeTimeFormat("es", { numeric: "auto" });
     const dtf = new Intl.DateTimeFormat("es", { hour: '2-digit', minute: '2-digit' })
     const now = new Date()
